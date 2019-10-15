@@ -1,7 +1,7 @@
-const sequelize = require('../src/javascripts/util/util_sequelize')
-const User = require('../src/models/User')
-const Stay = require('../src/models/Stay')
-const Reservation = require('../src/models/Reservation')
+const sequelize = require('../server/javascripts/util/util_sequelize')
+const User = require('../server/models/User')
+const Stay = require('../server/models/Stay')
+const Reservation = require('../server/models/Reservation')
 
 // Association 정의
 User.hasMany(Stay, {

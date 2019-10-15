@@ -1,4 +1,4 @@
-const util_api = require('../../../src/javascripts/util/util_api')
+const util_api = require('../../../server/javascripts/util/util_api')
 
 const authController = {
     // 회원가입 api

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    header#header-container
+    main#main-container
+        //- button#login-button 로그인
+        a#login-button(href="./login") 로그인
+        form(action="./api/auth/logout" method="post")
+            button#logout-button 로그아웃
+    footer
+
+    script(src=".bundles/navigation.bundle.js")
