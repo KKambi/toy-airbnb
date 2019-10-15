@@ -5,9 +5,9 @@ block content
     main#main-container
         h1 로그인
         form#login-form.form(action='http://localhost:3000/api/auth/login' method='post')
-            label(for='user')
+            label(for='uid')
                 b 아이디
-            input(type='text' placeholder='Enter Username' name='user' required='')
+            input(type='text' placeholder='Enter Id' name='uid' required='')
             label(for='password')
                 b 비밀번호
             input(type='password' placeholder='Enter Password' name='password' required='')

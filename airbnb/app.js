@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routing
 app.use('/', require('./routes'))
-app.use('/api', require('./routes/api'))
+app.use('/api', require('./routes/api/api.index'))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
