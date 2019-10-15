@@ -14,6 +14,11 @@ const authController = {
     // 토큰인증 api
     async check(req, res) {
         util_api.respondSucess(res, "Authentication Suceess", req.decoded)
+    },
+
+    logout(req, res){
+        res.clearCookie('token')
+        res.redirect('/')
     }
 }
 

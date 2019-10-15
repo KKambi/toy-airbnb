@@ -13,7 +13,7 @@ const util_jwt = {
                 },
                 secret,
                 {
-                    expiresIn: '7d',
+                    expiresIn: '1h',
                     issuer: process.env.JWT_ISSUER,
                     subject: 'userInfo'
                 }, (err, token) => {

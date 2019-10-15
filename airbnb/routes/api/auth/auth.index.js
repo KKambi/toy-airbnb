@@ -5,5 +5,6 @@ const { authUser, authToken } = require('../../../src/javascripts/middleware/aut
 router.post('/register', controller.register)
 router.post('/login', authUser, controller.login)
 router.get('/check', authToken, controller.check)
+router.delete('/logout', controller.logout)
 
 module.exports = router

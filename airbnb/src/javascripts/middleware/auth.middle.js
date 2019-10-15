@@ -1,5 +1,6 @@
 const util_api = require('../util/util_api')
 const util_jwt = require('../util/util_jwt')
+const util_cookie = require('../util/util_cookie')
 const User = require('../../models/User')
 
 const authUser = async (req, res, next) => {
@@ -13,6 +14,7 @@ const authUser = async (req, res, next) => {
             
         const token = await util_jwt.makeJWT(req, userInfo)
         req.token = token
+        res.cookie('token', req.token, util_cookie.TOKEN_COOKIE_OPTIONS)
         next()
     } catch (err) {
         util_api.respondError(res, err)
@@ -20,7 +22,7 @@ const authUser = async (req, res, next) => {
 }
 
 const authToken = async (req, res, next) => {
-    const token = req.headers['x-access-token'] || req.query.token
+    const token = req.headers['x-access-token'] || req.query.token || req.cookies.token
 
     if (!token) util_api.respondFail(res, "Token doesn't exist")
 

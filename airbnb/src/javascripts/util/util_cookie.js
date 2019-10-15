@@ -1,8 +1,8 @@
-const MIN_30 = 1800000
+const ONE_HOUR = 60*60*1000
 
 const util_cookie = {
-    COOKIE_OPTIONS: {
-        maxAge: MIN_30,
+    TOKEN_COOKIE_OPTIONS: {
+        maxAge: ONE_HOUR,
         httpOnly: true
     }
 }
