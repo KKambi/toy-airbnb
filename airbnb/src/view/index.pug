@@ -2,25 +2,6 @@ extends layout
 
 block content
     header#header-container
-        nav#navigation-container
-        a#navigation-button-index(href='/')
-            | HOME
-        a#navigation-button-find(href='/users/find')
-            | 훔쳐보기
-        if signed === 'true'
-            a(onclick="document.querySelector('#logout-form').submit();")
-                | 로그아웃
-            form#logout-form(action="/sessions/destroy" method="POST" style="display:none;")  
-        else
-            a#navigation-button-login(href='/sessions/new')
-                | 로그인
-        
     main#main-container
-        h1
-            | 홈
-        p
-            | Index Page
+
     footer
-    script(src='/javascripts/navigation.bundle.js')
-    script(src='/javascripts/index.bundle.js')
-    script(src='/javascripts/mainContent.bundle.js')

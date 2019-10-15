@@ -8,11 +8,6 @@ const sassMiddleware = require('node-sass-middleware');
 
 // 세션 및 redis 모듈
 const redis = require('redis');
-const session = require('express-session');
-const redisStore = require('connect-redis')(session);
-
-// 유틸 라이브러리
-const util_uuid = require('./src/javascripts/util_uuid')
 
 // 라우터 설정
 const indexRouter = require('./routes/index');
@@ -24,10 +19,10 @@ const app = express();
 require('dotenv').config();
 
 // redis 설정
-const redisClient = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: 6379
-})
+// const redisClient = redis.createClient({
+//     host: process.env.REDIS_HOST,
+//     port: 6379
+// })
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src/view'));
@@ -46,9 +41,6 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/sessions', sessionsRouter);
-app.use('/users', usersRouter);
-app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
