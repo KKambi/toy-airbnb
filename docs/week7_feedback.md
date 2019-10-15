@@ -6,3 +6,6 @@
 <ORM>
 1. If you don't define a primaryKey then sequelize uses id by default.
 If you want to set your own, just use primaryKey: true on your column.
+
+<MySQL>
+1. DB를 만들면, 특정 사용자에게 접근 권한을 부여해야 사용할 수 있다.

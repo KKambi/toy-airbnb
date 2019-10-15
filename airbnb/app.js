@@ -7,7 +7,7 @@ const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 
 // 세션 및 redis 모듈
-const redis = require('redis');
+// const redis = require('redis');
 
 // 라우터 설정
 const indexRouter = require('./routes/index');
