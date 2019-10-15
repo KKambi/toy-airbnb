@@ -1,13 +1,21 @@
 
 const util_api = {
-    respond: (res, message, jwt = null) => {
+    respondSucess: (res, message, token = null) => {
         res.json({
+            sucess: true,
             message,
-            jwt
+            token
         })
     },
 
-    onError: (res, err) => {
+    respondFail: (res, message) => {
+        res.status(403).json({
+            success: false,
+            message: message
+        })
+    },
+
+    respondError: (res, err) => {
         res.status(403).json({
             message: err.message
         })
