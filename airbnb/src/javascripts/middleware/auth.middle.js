@@ -1,6 +1,4 @@
 const util_api = require('../util/util_api')
-const util_encryption = require('../util/util_encryption')
-const util_is = require('../util/util_is')
 const util_jwt = require('../util/util_jwt')
 const User = require('../../models/User')
 
@@ -10,8 +8,8 @@ const authUser = async (req, res, next) => {
         const user = await User.findOne({ where: { uid: uid } })
         const userInfo = user ? user.dataValues : null
 
-        if (!util_is.isExist(user)) throw new Error("User not exist")  // 입력된 uid에 해당하는 유저가 없는 경우
-        if (!util_encryption.verify(password, userInfo.salt, userInfo.password)) throw new Error("Password not match")    // uid는 존재하나 비밀번호가 틀린 경우
+        if (!user) throw new Error("User not exist")  // 입력된 uid에 해당하는 유저가 없는 경우
+        if (!User.verify(password, userInfo.salt, userInfo.password)) throw new Error("Password not match")    // uid는 존재하나 비밀번호가 틀린 경우
             
         const token = await util_jwt.makeJWT(req, userInfo)
         req.token = token

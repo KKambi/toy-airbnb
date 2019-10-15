@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../javascripts/util/util_sequelize')
+const util_encryption = require('../javascripts/util/util_encryption')
 
 // User 스키마 정의
 const User = sequelize.define('user', {
@@ -32,5 +33,9 @@ const User = sequelize.define('user', {
         }
     }
 })
+
+User.verify = function(inputPassword, storedSalt, storedPassword){
+    return util_encryption.isSame(inputPassword, storedSalt, storedPassword)
+}
 
 module.exports = User

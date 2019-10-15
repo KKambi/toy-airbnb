@@ -29,7 +29,7 @@ const util_encrpytion = {
      * @param {string} storedPassword stored password of that id
      * @return {boolean} 
      */
-    verify: function (inputPassword, storedSalt, storedPassword) {
+    isSame: function (inputPassword, storedSalt, storedPassword) {
         const encryptedPassword = crypto.pbkdf2Sync(inputPassword, storedSalt, this.REPEAT_TIME, this.PASSWORD_LENGTH, this.HASH_ALGORITHM)
             .toString('base64')
         return encryptedPassword === storedPassword
