@@ -32,6 +32,9 @@ const User = sequelize.define('user', {
             max: 10
         }
     }
+}, {
+    sequelize,
+    modelName: 'user'
 })
 
 User.verify = function(inputPassword, storedSalt, storedPassword){

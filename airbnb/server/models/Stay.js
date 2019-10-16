@@ -11,7 +11,7 @@ const Stay = sequelize.define('stay', {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false
     },
-    guests: {
+    guest: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false
     },
@@ -22,6 +22,10 @@ const Stay = sequelize.define('stay', {
             min: 0,
             max: 10
         }
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
     beds: {
         type: Sequelize.INTEGER.UNSIGNED,
@@ -35,6 +39,9 @@ const Stay = sequelize.define('stay', {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false
     },
+}, {
+    sequelize,
+    modelName: 'stay'
 })
 
 module.exports = Stay

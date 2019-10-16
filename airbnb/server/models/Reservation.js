@@ -11,6 +11,9 @@ const Reservation = sequelize.define('reservation', {
         type: Sequelize.DATEONLY,
         allowNull: false
     }
+}, {
+    sequelize,
+    modelName: 'reservation'
 })
 
 module.exports = Reservation
