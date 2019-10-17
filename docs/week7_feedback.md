@@ -7,8 +7,11 @@
 1. If you don't define a primaryKey then sequelize uses id by default.
 If you want to set your own, just use primaryKey: true on your column.
 2. validate 조건을 건 경우, 유효성 검사를 통과하지 못해 insert되지 못하는 경우가 있다.
-    - then/catch로 예외처리를 할 것
-    - async/await의 경우 try..catch로 예외처리를 할 것
+   - then/catch로 예외처리를 할 것
+   - async/await의 경우 try..catch로 예외처리를 할 것
+3. 객체 관계를 설정하여 DB Table을 생성했다고 해서, 우리가 모델 객체를 쓸 때 관계가 붙어있는 게 아니다.
+   - 모델 객체 내에도 관계를 표현해줘야 함
+   - 그래야만 다른 파일에서도, models객체에 붙어있는 우리의 custom모델을 제대로(관계가 붙어있는 채로) 사용할 수 있다.
 
 ## MySQL
 1. DB를 만들면, 특정 사용자에게 접근 권한을 부여해야 사용할 수 있다.
@@ -22,3 +25,6 @@ If you want to set your own, just use primaryKey: true on your column.
 
 ## Webpack
 1. babel-plugin-transform-runtime은 예전 버전의 바벨로더와 호환된다. @babel/plugin-transform-runtime를 써야함!
+
+## nginx
+1. nginx를 프록시 서버로 설정할 시, 80번 포트로 접속할 때 파비콘이 적용되지 않는 문제??????

@@ -1,0 +1,23 @@
+{
+    "development": {
+        "username": "DB접속할 유저네임",
+        "password": "DB접속할 유저패스워드",
+        "database": "DB의 Database이름",
+        "host": "DB서버 host",
+        "dialect": "DB서버 종류",
+    },
+    "test": {
+        "username": "",
+        "password": "",
+        "database": "",
+        "host": "",
+        "dialect": ""
+    },
+    "production": {
+        "username": "",
+        "password": "",
+        "database": "",
+        "host": "",
+        "dialect": ""
+    }
+}
