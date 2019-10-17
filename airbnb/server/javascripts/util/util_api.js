@@ -1,5 +1,12 @@
 
 const util_api = {
+    respondData: (res, data) => {
+        res.json({
+            success: true,
+            data
+        })
+    },
+
     respondSucess: (res, message, token = null) => {
         res.json({
             sucess: true,
