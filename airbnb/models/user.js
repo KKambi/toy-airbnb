@@ -12,6 +12,19 @@ module.exports = (sequelize, DataTypes) => {
 
     User.associate = function (models) {
         // associations can be defined here
+        models.User.hasMany(models.Stay, {
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
+            foreignKey: 'host_id',
+            allowNull: false
+        })
+
+        models.User.hasMany(models.Reservation, {
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE',
+            foreignKey: 'guest_id',
+            allowNull: false
+        })
     };
 
     User.verify = function (inputPassword, storedSalt, storedPassword) {

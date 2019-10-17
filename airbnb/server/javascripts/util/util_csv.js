@@ -1,10 +1,8 @@
 const parse = require('csv-parse')
 const fs = require('fs')
 const path = require('path')
-const sequelize = require('../util/util_sequelize')
-// const Stay = sequelize.import(path.join(__dirname + "../../../models/Stay"))
-const Stay = sequelize
-console.log(Stay)
+const models = require('../../../models')
+console.log(models.Stay)
 
 // Output
 const output = []
@@ -32,7 +30,8 @@ parser.on('end', async function () {
     try{
         for (let record of output){
             const [ name, price, guest, type, image, beds, bedrooms, bathrooms, host_id ] = record
-            await Stay.create({
+            console.log(record)
+            await models.Stay.create({
                 name,
                 price,
                 guest,

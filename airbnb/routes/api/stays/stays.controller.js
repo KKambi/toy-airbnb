@@ -5,6 +5,7 @@ const stayController = {
     // 모든 유저 정보를 반환하는 api
     async getStays(req, res) {
         const stays = await models.Stay.findAll()
+        models.Stay.create()
         util_api.respondData(res, stays)
     },
 
