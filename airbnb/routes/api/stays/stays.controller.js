@@ -1,25 +1,21 @@
 const util_api = require('../../../server/javascripts/util/util_api')
+const models = require('../../../models')
 
-const authController = {
-    // 회원가입 api
-    register(req, res) {
-        res.send('register api is working')
+const stayController = {
+    // 모든 유저 정보를 반환하는 api
+    async getStays(req, res) {
+        const stays = await models.Stay.findAll()
+        util_api.respondData(res, stays)
     },
 
-    // 로그인 api
-    async login(req, res) {
-        util_api.respondSucess(res, "Login Success", req.token)
-    },
-
-    // 토큰인증 api
-    async check(req, res) {
-        util_api.respondSucess(res, "Authentication Suceess", req.decoded)
-    },
-
-    logout(req, res){
-        res.clearCookie('token')
-        res.redirect('/')
+    // 특정 유저 정보를 반환하는 api
+    async getStayById(req, res){
+        const id = req.query.id
+        const stay = await models.Stay.findOne({ 
+            where: { id }
+        })
+        util_api.respondData(res, stay)
     }
 }
 
-module.exports = authController
+module.exports = stayController
