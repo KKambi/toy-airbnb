@@ -1,5 +1,5 @@
 const util_api = require('../../../server/javascripts/util/util_api')
-const models = require('../../../models')
+const models = require('../../../server/database/models')
 
 const reservationsController = {
     // 새로운 예약을 입력하는 api
@@ -18,7 +18,6 @@ const reservationsController = {
     },
 
     // 예약을 취소하는 api
-    // TODO: 예약의 guest_id가, 삭제를 요청하는 유저의 id와 일치하는지 validation 필요함
     async delete(req, res){
         const { id } = req.body
         const user_id = req.decoded.id

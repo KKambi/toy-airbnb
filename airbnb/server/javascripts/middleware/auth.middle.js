@@ -1,7 +1,7 @@
 const util_api = require('../util/util_api')
 const util_jwt = require('../util/util_jwt')
 const util_cookie = require('../util/util_cookie')
-const models = require('../../../models')
+const models = require('../../database/models')
 
 const authUser = async (req, res, next) => {
     const { uid, password } = req.body

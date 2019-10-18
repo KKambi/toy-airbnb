@@ -1,6 +1,6 @@
 'use strict';
 
-const util_encryption = require('../server/javascripts/util/util_encryption')
+const util_encryption = require('../../javascripts/util/util_encryption')
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {

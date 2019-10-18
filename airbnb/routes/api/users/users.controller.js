@@ -1,5 +1,5 @@
 const util_api = require('../../../server/javascripts/util/util_api')
-const models = require('../../../models')
+const models = require('../../../server/database/models')
 
 const userController = {
     // 모든 유저 정보를 반환하는 api
