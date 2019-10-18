@@ -12,9 +12,10 @@ If you want to set your own, just use primaryKey: true on your column.
 3. 객체 관계를 설정하여 DB Table을 생성했다고 해서, 우리가 모델 객체를 쓸 때 관계가 붙어있는 게 아니다.
    - 모델 객체 내에도 관계를 표현해줘야 함
    - 그래야만 다른 파일에서도, models객체에 붙어있는 우리의 custom모델을 제대로(관계가 붙어있는 채로) 사용할 수 있다.
+4. 특정 유저만 가능한 쿼리문일 경우, where절을 이용하여 접속한 유저의 아이디를 테이블의 foreign key (ex. host_id / guest_id)와 적절히 비교하면 된다.
 
-## MySQL
-1. DB를 만들면, 특정 사용자에게 접근 권한을 부여해야 사용할 수 있다.
+## MySQL / 쿼리문
+2. DB를 만들면, 특정 사용자에게 접근 권한을 부여해야 사용할 수 있다.
 
 ## express router
 1. './routes' 처럼 뒷 경로를 생략하면, 자동으로 index를 찾는다 -> '/routes/index'와 동일함

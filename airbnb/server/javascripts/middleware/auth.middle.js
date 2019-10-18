@@ -42,6 +42,7 @@ const authToken = async (req, res, next) => {
 
     try {
         const decoded = await util_jwt.verifyJWT(req, token)
+        req.decoded = decoded
         next()
     } catch(err) {
         util_api.respondError(res, err)
