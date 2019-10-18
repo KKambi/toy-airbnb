@@ -3,21 +3,6 @@ const util_jwt = require('../util/util_jwt')
 const util_cookie = require('../util/util_cookie')
 const models = require('../../../models')
 
-const authAdmin = async (req, res, next) => {
-    const token = req.headers['x-access-token'] || req.query.token || req.cookies.token
-
-    if (!token) util_api.respondFail(res, "Token doesn't exist")
-
-    try {
-        const decoded = await util_jwt.verifyJWT(req, token)
-        if (decoded.authority < 3) util_api.respondFail(res, "You're not admin")
-        req.decoded = decoded
-        next()
-    } catch(err) {
-        util_api.respondError(res, err)
-    }
-}
-
 const authUser = async (req, res, next) => {
     const { uid, password } = req.body
     try {
@@ -36,6 +21,20 @@ const authUser = async (req, res, next) => {
     }
 }
 
+const authAdmin = async (req, res, next) => {
+    const token = req.headers['x-access-token'] || req.query.token || req.cookies.token
+
+    if (!token) util_api.respondFail(res, "Token doesn't exist")
+
+    try {
+        const decoded = await util_jwt.verifyJWT(req, token)
+        if (decoded.authority < 3) util_api.respondFail(res, "You're not admin")
+        next()
+    } catch(err) {
+        util_api.respondError(res, err)
+    }
+}
+
 const authToken = async (req, res, next) => {
     const token = req.headers['x-access-token'] || req.query.token || req.cookies.token
 
@@ -43,7 +42,6 @@ const authToken = async (req, res, next) => {
 
     try {
         const decoded = await util_jwt.verifyJWT(req, token)
-        req.decoded = decoded
         next()
     } catch(err) {
         util_api.respondError(res, err)

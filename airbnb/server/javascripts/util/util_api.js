@@ -7,11 +7,10 @@ const util_api = {
         })
     },
 
-    respondSucess: (res, message, token = null) => {
+    respondSucess: (res, message) => {
         res.json({
             sucess: true,
-            message,
-            token
+            message
         })
     },
 
