@@ -3,10 +3,20 @@ extends layout
 block content
     header#header-container
     main#main-container
-        //- button#login-button 로그인
-        a#login-button(href="./login") 로그인
-        form(action="./api/auth/logout" method="post")
-            button#logout-button 로그아웃
+        div#navigation-container
+            a#login-button(href="./login") 로그인
+            form(action="./api/auth/logout" method="post")
+                button#logout-button 로그아웃
+        div#date-container
+            form(action="./api/reservations/create" method="post")
+                label(for="check-in")
+                    | 체크인
+                input#check-in(type="date")
+                label(for="check-out")
+                    | 체크아웃
+                input#check-out(type="date")
+                button#reservation-button
+                    | 예약
     footer
 
     script(src=".bundles/navigation.bundle.js")
