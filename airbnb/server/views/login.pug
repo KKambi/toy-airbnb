@@ -4,7 +4,7 @@ block content
     header#header-container
     main#main-container
         h1 로그인
-        form#login-form.form(action='http://localhost:3000/api/auth/login' method='post')
+        form#login-form.form(action='/api/auth/login' method='post')
             label(for='uid')
                 b 아이디
             input(type='text' placeholder='Enter Id' name='uid' required='')
