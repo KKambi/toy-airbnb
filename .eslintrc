@@ -16,6 +16,7 @@
     "quotes": 0,
     "arrow-parens": 0,
     "strict": 0,
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "max-len": 0
   }
 }
