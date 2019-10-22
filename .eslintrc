@@ -4,7 +4,18 @@
     "es6": true,
     "browser": true
   },
+  "parser": "babel-eslint",
   "extends": [
     "airbnb"
-  ]
+  ],
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/state-in-constructor": 0,
+    "react/prefer-stateless-function": 0,
+    "quotes": 0,
+    "arrow-parens": 0,
+    "strict": 0,
+    "linebreak-style": 0
+  }
 }
