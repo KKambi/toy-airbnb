@@ -1,8 +1,7 @@
-const router = require('express').Router()
-const controller = require('./stays.controller')
-const { authToken } = require('../../../javascripts/middleware/auth.middle')
+const router = require('express').Router();
+const controller = require('./stays.controller');
 
-router.get('/', authToken, controller.getStayById)
-router.get('/all', authToken, controller.getStays)
+router.get('/', controller.getStayById);
+router.get('/all', controller.getStays);
 
-module.exports = router
+module.exports = router;
