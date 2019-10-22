@@ -5,8 +5,6 @@ import Node from './Node/Node';
 import utilFetch from '../../utils/utilFetch';
 
 const StyledContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
   display: ${props => (props.isLoaded ? 'block' : 'none')};
 `;
 
