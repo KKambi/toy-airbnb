@@ -12,7 +12,7 @@ const sassMiddleware = require('node-sass-middleware');
 /*
     Load Config
 */
-const jwtConfig = require('./server/javascripts/jwt/config')
+const jwtConfig = require('./javascripts/jwt/config')
 require('dotenv').config();
 
 /*
@@ -30,7 +30,7 @@ const app = express();
 app.set('jwt-secret', jwtConfig.secret)
 
 // view engine setup
-app.set('views', path.join(__dirname, 'server/views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
@@ -43,7 +43,7 @@ app.use(sassMiddleware({
     indentedSyntax: true, // true = .sass and false = .scss
     sourceMap: true
 }));
-app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 
 // Routing
 app.use('/', require('./routes'))

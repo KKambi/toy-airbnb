@@ -1,5 +1,5 @@
-const util_api = require('../../../server/javascripts/util/util_api')
-const models = require('../../../server/database/models')
+const util_api = require('../../../javascripts/util/util_api')
+const models = require('../../../database/models')
 
 const reservationsController = {
     // 새로운 예약을 입력하는 api
