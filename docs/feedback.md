@@ -29,3 +29,25 @@ If you want to set your own, just use primaryKey: true on your column.
 
 ## nginx
 1. nginx를 프록시 서버로 설정할 시, 80번 포트로 접속할 때 파비콘이 적용되지 않는 문제??????
+
+## eslint 적용하기
+***주의점***
+1. open하는 폴더가 무엇이냐에 따라 적용될 수도, 아닐 수도 있다
+2. 왜냐하면 VS Code 에디터 자체에서 Extension으로 활용하는 것이기 때문
+3. open하는 폴더의 최상위 폴더에 eslint config 파일이 있어야 한다 (package.json 안에 적용하거나, .eslintrc 파일을 두거나)
+  
+***적용***
+1. VS Code ESLint Extension 설치
+2. eslint / eslint-config-airbnb 설치
+3. eslint-config-airbnb peerDependencies 설치
+4-1. open하는 폴더의 최상위경로에 .eslintrc 구현
+4-2. 또는 최상위경로의 package.json에 eslint 설정 구현
+
+## eslint / babel-eslint 주의점
+- 최상위 프로젝트에 eslint / babel-eslint 모듈이 둘 다 있어야 안에 서브 폴더들을 모두 검사할 수 있다
+
+## arrow function
+```javascript
+// 객체 리터럴 표현을 반환하기 위해서는 함수 본문(body)을 괄호 속에 넣음:
+params => ({foo: bar})
+```
