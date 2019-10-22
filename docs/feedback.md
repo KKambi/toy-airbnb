@@ -51,3 +51,14 @@ If you want to set your own, just use primaryKey: true on your column.
 // 객체 리터럴 표현을 반환하기 위해서는 함수 본문(body)을 괄호 속에 넣음:
 params => ({foo: bar})
 ```
+
+## React
+***fetch initial data***
+1. useEffect API 문서를 자세히 봤더라면 금방 알 수 있었다.
+2. 두번째 인자로, 감지 엘리먼트를 지정할 수 있다.
+3. 이 엘리먼트가 변화했을 때만 useEffect 내의 콜백 함수가 실행되어 re-render
+4. 현재는 빈 배열을 준 상태로, 초기 1번만 렌더링된다.
+5. 이후 필터링에 의해 stays state가 변화할 경우 이를 적절히 감지하여 re-render할 수 있도록 수정해야 한다.
+
+***페이지네이션 어떻게?????***
+1. 어떻게 하나요;;;;;
