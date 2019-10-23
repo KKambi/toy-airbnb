@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
 import utilFetch from '../../utils/utilFetch';
+import { OpacityConsumer } from '../ContainerOpacity';
 
 const StyledContainer = styled.div`
+  opacity: ${props => (props.opacity)}
   display: ${props => (props.isLoaded ? 'block' : 'none')};
 `;
 
@@ -26,13 +28,21 @@ function Container() {
     return function cleanUp() {
       setIsLoaded(false);
     };
-  }, isLoaded);
+  }, []);
 
   return (
-    <StyledContainer isLoaded={isLoaded}>
-      <NumberBar stayCount={stayCount} />
-      {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
-    </StyledContainer>
+    <>
+      <OpacityConsumer>
+        {
+          ({ stayOpacity }) => (
+            <StyledContainer isLoaded={isLoaded} opacity={stayOpacity}>
+              <NumberBar stayCount={stayCount} />
+              {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+            </StyledContainer>
+          )
+        }
+      </OpacityConsumer>
+    </>
   );
 }
 
