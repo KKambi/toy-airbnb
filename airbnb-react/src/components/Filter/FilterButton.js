@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Modal from '../Modal/Modal';
-import { OpacityConsumer } from '../ContainerOpacity';
+import { OpacityConsumer } from '../Context/ContainerOpacity';
 
 const StyledButton = styled.button`
   position: relative;

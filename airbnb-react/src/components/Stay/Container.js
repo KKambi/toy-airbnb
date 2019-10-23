@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
 import utilFetch from '../../utils/utilFetch';
-import { OpacityConsumer } from '../ContainerOpacity';
+import { OpacityConsumer } from '../Context/ContainerOpacity';
 
 const StyledContainer = styled.div`
   opacity: ${props => (props.opacity)}
