@@ -11,7 +11,7 @@ function FilterBar() {
 
   return (
     <StyledBar>
-      {filterList.map(filterName => <FilterButton name={filterName} />)}
+      {filterList.map((filterName, idx) => <FilterButton key={idx} name={filterName} />)}
     </StyledBar>
   );
 }
