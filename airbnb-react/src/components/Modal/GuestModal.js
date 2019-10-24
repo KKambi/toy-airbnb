@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledModal = styled.div`
@@ -35,31 +34,43 @@ const NumberDiv = styled.div`
   margin: 0 2rem;
 `;
 
-const StyledButton = styled.button`
+const Button = styled.button`
   background-color: #FFFFFF;
+  font-size: 1.5rem;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.4
+  }
+`;
+
+const PlusButton = styled(Button)`
   color: ${props => props.theme.buttonClickColor};
   border: 1px solid ${props => props.theme.buttonClickColor};
   border-radius: 50%;
-  font-size: 1.5rem;
   width: 3rem;
   height: 3rem;
-  cursor: pointer;
 `;
 
-const SaveButton = styled.button`
-  background-color: transparent;
+const MinusButton = styled(Button).attrs((props) => ({
+  disabled: (props.number <= 0 || props.needAdult),
+}))`
+  color: ${props => props.theme.buttonClickColor};
+  border: 1px solid ${props => props.theme.buttonClickColor};
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+`;
+
+const SaveButton = styled(Button)`
   color: ${props => props.theme.buttonClickColor};
   border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-weight: bold;
 `;
 
-const CancelButton = styled.button`
-  background-color: transparent;
+const CancelButton = styled(Button)`
   color: #000000;
   border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-weight: bold;
 `;
 
 function GuestModal() {
@@ -67,33 +78,68 @@ function GuestModal() {
   const [child, setChild] = useState(0);
   const [kid, setKid] = useState(0);
 
+  const existNoAdult = () => (adult <= 0);
+
+  const existChildAndKid = () => (child > 0 || kid > 0);
+
+  // 어린이, 유아 validation
+  useEffect(() => {
+    if (existNoAdult() && existChildAndKid()) {
+      setAdult(1);
+    }
+  }, [adult, child, kid]);
+
+  const plusAdult = () => {
+    setAdult(adult + 1);
+  };
+
+  const minusAdult = () => {
+    setAdult(adult - 1);
+  };
+
+  const plusChild = () => {
+    setChild(child + 1);
+  };
+
+  const minusChild = () => {
+    setChild(child - 1);
+  };
+
+  const plusKid = () => {
+    setKid(kid + 1);
+  };
+
+  const minusKid = () => {
+    setKid(kid - 1);
+  };
+
   return (
     <StyledModal>
       <FlexDiv>
         <LeftDiv>
           성인
         </LeftDiv>
-        <StyledButton>-</StyledButton>
+        <MinusButton number={adult} onClick={minusAdult}>-</MinusButton>
         <NumberDiv>{adult}+</NumberDiv>
-        <StyledButton>+</StyledButton>
+        <PlusButton onClick={plusAdult}>+</PlusButton>
       </FlexDiv>
       <FlexDiv>
         <LeftDiv>
           어린이<br />
           2~12세
         </LeftDiv>
-        <StyledButton>-</StyledButton>
+        <MinusButton number={child} onClick={minusChild}>-</MinusButton>
         <NumberDiv>{child}+</NumberDiv>
-        <StyledButton>+</StyledButton>
+        <PlusButton onClick={plusChild}>+</PlusButton>
       </FlexDiv>
       <FlexDiv>
         <LeftDiv>
           유아<br />
           2세 미만
         </LeftDiv>
-        <StyledButton>-</StyledButton>
+        <MinusButton number={kid} onClick={minusKid}>-</MinusButton>
         <NumberDiv>{kid}+</NumberDiv>
-        <StyledButton>+</StyledButton>
+        <PlusButton onClick={plusKid}>+</PlusButton>
       </FlexDiv>
       <FlexDiv>
         <LeftDiv>
@@ -102,7 +148,7 @@ function GuestModal() {
         <SaveButton>저장</SaveButton>
       </FlexDiv>
     </StyledModal>
-  );
+  )
 }
 
 export default GuestModal;
