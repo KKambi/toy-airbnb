@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import FilterContainer from './FilterContainer';
 import GuestModal from '../Modal/GuestModal';
+import PriceModal from '../Modal/PriceModal';
 
 const StyledBar = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ function FilterBar() {
     {
       id: 0,
       name: '날짜',
+      modal: <GuestModal />,
       modalDisplay: 'none',
     },
     {
@@ -23,16 +25,19 @@ function FilterBar() {
     {
       id: 2,
       name: '숙소 유형',
+      modal: <GuestModal />,
       modalDisplay: 'none',
     },
     {
       id: 3,
       name: '가격',
+      modal: <PriceModal />,
       modalDisplay: 'none',
     },
     {
       id: 4,
       name: '필터 추가하기',
+      modal: <GuestModal />,
       modalDisplay: 'none',
     },
   ]);
