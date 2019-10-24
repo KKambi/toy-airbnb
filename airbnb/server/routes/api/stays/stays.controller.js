@@ -47,7 +47,7 @@ const stayController = {
   async filterStays(req, res) {
     try {
       const { guest } = req.query;
-      const stays = await models.Stay.findAll({
+      const stays = await models.Stay.findAndCountAll({
         where: {
           guest: {
             [gt]: guest,
