@@ -1,7 +1,8 @@
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import theme from '../style/theme';
 import { OpacityProvider } from './Context/ContainerOpacity';
+import { StayProvider } from './Context/StayContext';
+import theme from '../style/theme';
 import FilterBar from './Filter/FilterBar';
 import StayContainer from './Stay/Container';
 
@@ -39,9 +40,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <OpacityProvider>
-        <GlobalStyle />
-        <FilterBar />
-        <StayContainer />
+        <StayProvider>
+          <GlobalStyle />
+          <FilterBar />
+          <StayContainer />
+        </StayProvider>
       </OpacityProvider>
     </ThemeProvider>
   );

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
 import { OpacityConsumer } from '../Context/ContainerOpacity';
+import { StayConsumer } from '../Context/StayContext';
 
 const StyledBackdrop = styled.div`
   opacity: ${props => (props.opacity)};
@@ -13,20 +14,24 @@ const StyledContainer = styled.div`
   opacity: ${props => (props.opacity)};
 `;
 
-function Container(props) {
-  const { stayObj, stayCountObj } = props;
-
+function Container() {
   return (
     <>
       <OpacityConsumer>
         {
           ({ stayOpacity, actions }) => (
-            <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
-              <StyledContainer>
-                <NumberBar stayCount={stayCountObj.stayCount} />
-                {stayObj.stays.map((stay) => <Node key={stay.id} stay={stay} />)}
-              </StyledContainer>
-            </StyledBackdrop>
+            <StayConsumer>
+              {
+                ({ stays, stayCount }) => (
+                  <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
+                    <StyledContainer>
+                      <NumberBar stayCount={stayCount} />
+                      {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+                    </StyledContainer>
+                  </StyledBackdrop>
+                )
+              }
+            </StayConsumer>
           )
         }
       </OpacityConsumer>
