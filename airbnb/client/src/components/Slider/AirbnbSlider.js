@@ -64,9 +64,9 @@ function AirbnbSlider(props) {
   const { setMinPrice, setMaxPrice } = priceHandler;
   const classes = useStyles();
 
-  const changePrice = (event, defaultValue) => {
-    setMinPrice(defaultValue[0]);
-    setMaxPrice(defaultValue[1]);
+  const changePrice = (event, value) => {
+    setMinPrice(value[0]);
+    setMaxPrice(value[1]);
   };
 
   return (
