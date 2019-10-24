@@ -14,14 +14,14 @@ const util_api = {
   },
 
   respondFail: (res, message) => {
-    res.status(403).json({
+    res.json({
       success: false,
       message,
     });
   },
 
   respondError: (res, err) => {
-    res.status(403).json({
+    res.json({
       message: err.message,
     });
   },
