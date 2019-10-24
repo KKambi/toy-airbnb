@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
-import utilFetch from '../../utils/utilFetch';
 import { OpacityConsumer } from '../Context/ContainerOpacity';
 
 const StyledBackdrop = styled.div`
@@ -11,22 +11,10 @@ const StyledBackdrop = styled.div`
 
 const StyledContainer = styled.div`
   opacity: ${props => (props.opacity)};
-  display: ${props => (props.isLoaded ? 'block' : 'none')};
 `;
 
-function Container() {
-  // const [stays, setStays] = useState([]);
-  const [stayCount, setStayCount] = useState(0);
-
-  // isLoading의 상태에 따라 렌더링을 할지 말지 결정합니다.
-  useEffect(() => {
-    async function fetchData() {
-      const res = await utilFetch.getData('/api/stays/all');
-      setStays(res.data.rows);
-      setStayCount(res.data.count);
-    }
-    fetchData();
-  }, []);
+function Container(props) {
+  const { stayObj, stayCountObj } = props;
 
   return (
     <>
@@ -35,8 +23,8 @@ function Container() {
           ({ stayOpacity, actions }) => (
             <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
               <StyledContainer>
-                <NumberBar stayCount={stayCount} />
-                {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+                <NumberBar stayCount={stayCountObj.stayCount} />
+                {stayObj.stays.map((stay) => <Node key={stay.id} stay={stay} />)}
               </StyledContainer>
             </StyledBackdrop>
           )
@@ -45,5 +33,16 @@ function Container() {
     </>
   );
 }
+
+Container.propTypes = {
+  stayObj: PropTypes.shape({
+    stays: PropTypes.array.isRequired,
+    setStays: PropTypes.func.isRequired,
+  }).isRequired,
+  stayCountObj: PropTypes.shape({
+    stayCount: PropTypes.number.isRequired,
+    setStayCount: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Container;
