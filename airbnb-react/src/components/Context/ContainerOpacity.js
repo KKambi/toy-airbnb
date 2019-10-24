@@ -12,7 +12,18 @@ function OpacityProvider(props) {
     setStayOpacity(opacity);
   };
 
-  const value = { stayOpacity, toggleOpacity };
+  const setOpacityClear = () => {
+    if (stayOpacity === 0.4) {
+      setStayOpacity(1);
+    }
+  };
+
+  const actions = {
+    toggleOpacity,
+    setOpacityClear,
+  };
+
+  const value = { stayOpacity, actions };
   const { children } = props;
   return (
     <Provider value={value}>

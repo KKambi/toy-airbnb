@@ -5,7 +5,6 @@ import Modal from '../Modal/Modal';
 import { OpacityConsumer } from '../Context/ContainerOpacity';
 
 const StyledButton = styled.button`
-  position: relative;
   padding: 0.5em 0.8em
   font-size: ${props => props.theme.defaultFontSize};
   border: ${props => props.theme.border};
@@ -21,10 +20,10 @@ const StyledButton = styled.button`
   `}
 `;
 
-function FilterButton(props) {
+function FilterContainer(props) {
   const [modalDisplay, setModalDisplay] = useState('none');
   const [active, setActive] = useState(false);
-  const { name } = props;
+  const { name, children } = props;
 
   const toggleButton = () => {
     setActive(!active);
@@ -38,19 +37,31 @@ function FilterButton(props) {
   return (
     <OpacityConsumer>
       {
-        ({ toggleOpacity }) => (
-          <StyledButton active={active} onClick={() => { toggleButton(); toggleModal(); toggleOpacity(); }}>
-            {name}
-            <Modal display={modalDisplay} />
-          </StyledButton>
+        ({ actions }) => (
+          <div>
+            <StyledButton
+              active={active}
+              onClick={() => {
+                toggleButton();
+                toggleModal();
+                actions.toggleOpacity();
+              }}
+            >
+              {name}
+            </StyledButton>
+            <div style={{ position: "relative" }}>
+              { children }
+            </div>
+          </div>
         )
       }
     </OpacityConsumer>
   );
 }
 
-FilterButton.propTypes = {
+FilterContainer.propTypes = {
   name: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
-export default FilterButton;
+export default FilterContainer;

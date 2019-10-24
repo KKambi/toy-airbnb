@@ -5,8 +5,12 @@ import Node from './Node/Node';
 import utilFetch from '../../utils/utilFetch';
 import { OpacityConsumer } from '../Context/ContainerOpacity';
 
+const StyledBackdrop = styled.div`
+  opacity: ${props => (props.opacity)};
+`;
+
 const StyledContainer = styled.div`
-  opacity: ${props => (props.opacity)}
+  opacity: ${props => (props.opacity)};
   display: ${props => (props.isLoaded ? 'block' : 'none')};
 `;
 
@@ -34,11 +38,13 @@ function Container() {
     <>
       <OpacityConsumer>
         {
-          ({ stayOpacity }) => (
-            <StyledContainer isLoaded={isLoaded} opacity={stayOpacity}>
-              <NumberBar stayCount={stayCount} />
-              {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
-            </StyledContainer>
+          ({ stayOpacity, actions }) => (
+            <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
+              <StyledContainer isLoaded={isLoaded}>
+                <NumberBar stayCount={stayCount} />
+                {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+              </StyledContainer>
+            </StyledBackdrop>
           )
         }
       </OpacityConsumer>
