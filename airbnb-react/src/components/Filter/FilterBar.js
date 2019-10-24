@@ -12,30 +12,47 @@ function FilterBar() {
     {
       id: 0,
       name: '날짜',
+      modalDisplay: 'none',
     },
     {
       id: 1,
       name: '인원',
       modal: <GuestModal />,
+      modalDisplay: 'none',
     },
     {
       id: 2,
       name: '숙소 유형',
+      modalDisplay: 'none',
     },
     {
       id: 3,
       name: '가격',
+      modalDisplay: 'none',
     },
     {
       id: 4,
       name: '필터 추가하기',
+      modalDisplay: 'none',
     },
   ]);
+
+  const setActiveFilterIdx = (id) => {
+    const newFilterList = Object.assign(filterList);
+    newFilterList[id].modalDisplay = 'block';
+    setFilterList(newFilterList);
+  };
 
   return (
     <StyledBar>
       {filterList.map((filter) => (
-        <FilterContainer key={filter.id} name={filter.name}>
+        <FilterContainer
+          key={filter.id}
+          id={filter.id}
+          name={filter.name}
+          modalDisplay={filter.modalDisplay}
+          activeFilterMethod={setActiveFilterIdx}
+        >
           {filter.modal}
         </FilterContainer>
       ))}

@@ -7,9 +7,10 @@ const { Provider, Consumer: OpacityConsumer } = Context;
 function OpacityProvider(props) {
   const [stayOpacity, setStayOpacity] = useState(1);
 
-  const toggleOpacity = () => {
-    const opacity = (stayOpacity === 1 ? 0.4 : 1);
-    setStayOpacity(opacity);
+  const setOpacityCloudy = () => {
+    if (stayOpacity === 1) {
+      setStayOpacity(0.4);
+    }
   };
 
   const setOpacityClear = () => {
@@ -19,7 +20,7 @@ function OpacityProvider(props) {
   };
 
   const actions = {
-    toggleOpacity,
+    setOpacityCloudy,
     setOpacityClear,
   };
 

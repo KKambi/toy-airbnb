@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
 import { OpacityConsumer } from '../Context/ContainerOpacity';
 
 const StyledButton = styled.button`
@@ -20,18 +19,29 @@ const StyledButton = styled.button`
   `}
 `;
 
+const ModalContainer = styled.div`
+  display: ${props => props.modalDisplay};
+  position: relative;
+`;
+
 function FilterContainer(props) {
-  const [modalDisplay, setModalDisplay] = useState('none');
   const [active, setActive] = useState(false);
-  const { name, children } = props;
+  const [display, setDisplay] = useState('none');
+  const {
+    id,
+    name,
+    activeFilterMethod,
+    children,
+  } = props;
 
   const toggleButton = () => {
     setActive(!active);
+    activeFilterMethod(id);
   };
 
   const toggleModal = () => {
-    const display = (modalDisplay === 'none' ? 'block' : 'none');
-    setModalDisplay(display);
+    const newDisplay = (display === 'none' ? 'block' : 'none');
+    setDisplay(newDisplay);
   };
 
   return (
@@ -44,14 +54,15 @@ function FilterContainer(props) {
               onClick={() => {
                 toggleButton();
                 toggleModal();
-                actions.toggleOpacity();
+                actions.setOpacityCloudy();
+                actions.setOpacityClear();
               }}
             >
               {name}
             </StyledButton>
-            <div style={{ position: "relative" }}>
-              { children }
-            </div>
+            <ModalContainer modalDisplay={display}>
+              {children}
+            </ModalContainer>
           </div>
         )
       }
@@ -60,7 +71,9 @@ function FilterContainer(props) {
 }
 
 FilterContainer.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  activeFilterMethod: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
 

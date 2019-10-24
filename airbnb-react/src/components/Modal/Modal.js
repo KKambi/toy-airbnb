@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import onClickOutside from 'react-onclickoutside';
 
 const StyledModal = styled.div`
   position: absolute;
@@ -12,18 +13,33 @@ const StyledModal = styled.div`
   height: 100px;
   border: ${props => props.theme.border};
   border-radius: ${props => props.theme.borderRadius};
+  z-index: 10;
+  box-shadow: 0 0 2rem 0.5rem rgba(0, 0, 0, 0.1);
 `;
 
 function Modal(props) {
-  const { display } = props;
+  const [isOpen, setIsOpen] = useState(false);
+  const { display, children } = props;
+
+  Modal.handleClickOutside = () => {
+    setIsOpen(false);
+    console.log(isOpen);
+  };
 
   return (
-    <StyledModal display={display} />
+    <StyledModal display={display}>
+      {children}
+    </StyledModal>
   );
 }
 
-Modal.propTypes = {
-  display: PropTypes.string.isRequired,
+const clickOutsideConfig = {
+  handleClickOutside: () => Modal.handleClickOutside,
 };
 
-export default Modal;
+Modal.propTypes = {
+  display: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+export default onClickOutside(Modal, clickOutsideConfig);
