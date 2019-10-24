@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (sequelize, DataTypes) => {
   const Stay = sequelize.define(
     'Stay',
@@ -15,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {},
   );
+
   Stay.associate = function (models) {
     // associations can be defined here
     models.Stay.hasMany(models.Reservation, {

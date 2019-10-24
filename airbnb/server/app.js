@@ -12,7 +12,7 @@ const sassMiddleware = require('node-sass-middleware');
 /*
     Load Config
 */
-const jwtConfig = require('./javascripts/jwt/config')
+const jwtConfig = require('./javascripts/jwt/config');
 require('dotenv').config();
 
 /*
@@ -27,42 +27,44 @@ const app = express();
 // })
 
 // Set the secret key for jwt
-app.set('jwt-secret', jwtConfig.secret)
+app.set('jwt-secret', jwtConfig.secret);
 
 // view engine setup
-app.set('views', path.join(__dirname, './views'));
-app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, './views'));
+// app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(sassMiddleware({
+app.use(
+  sassMiddleware({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),
     indentedSyntax: true, // true = .sass and false = .scss
-    sourceMap: true
-}));
+    sourceMap: true,
+  }),
+);
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 // Routing
-app.use('/', require('./routes'))
-app.use('/api', require('./routes/api/api.index'))
+app.use('/', require('./routes'));
+app.use('/api', require('./routes/api/api.index'));
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 module.exports = app;

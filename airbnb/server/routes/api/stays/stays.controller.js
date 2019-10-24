@@ -1,5 +1,8 @@
+const Sequelize = require('sequelize');
 const util_api = require('../../../javascripts/util/util_api');
 const models = require('../../../database/models');
+
+const { gt } = Sequelize.Op;
 
 const stayController = {
   // 모든 숙소 정보와 카운트를 반환하는 api
@@ -33,13 +36,29 @@ const stayController = {
   // 총 숙소 개수를 반환하는 api
   async getStaysCount(req, res) {
     try {
-      const stays = await models.Stay.count({
+      const stays = await models.Stay.count();
+      util_api.respondData(res, stays);
+    } catch (err) {
+      util_api.respondError(res, err);
+    }
+  },
+
+  // 필터조건에 해당하는 숙소만을 반환하는 api
+  async filterStays(req, res) {
+    try {
+      const { guest } = req.query;
+      const stays = await models.Stay.findAll({
+        where: {
+          guest: {
+            [gt]: guest,
+          },
+        },
       });
       util_api.respondData(res, stays);
     } catch (err) {
       util_api.respondError(res, err);
     }
-  }
+  },
 };
 
 module.exports = stayController;
