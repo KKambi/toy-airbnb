@@ -5,7 +5,7 @@ import AirbnbSlider from '../Slider/AirbnbSlider';
 import PriceInput from './PriceInput';
 
 const StyledModal = styled.div`
-  width: 33rem;
+  width: 40rem;
   height: 18rem;
   padding: 2rem;
   font-size: 1.5rem;
@@ -56,8 +56,8 @@ const CancelButton = styled(Button)`
 `;
 
 function PriceModal() {
-  const [minPrice, setMinPrice] = useState(20000);
-  const [maxPrice, setMaxPrice] = useState(90000);
+  const [minPrice, setMinPrice] = useState(50000);
+  const [maxPrice, setMaxPrice] = useState(250000);
 
   const priceHandler = {
     setMinPrice,
@@ -67,10 +67,10 @@ function PriceModal() {
   return (
     <StayConsumer>
       {
-        ({ filterStay }) => (
+        ({ addFilter }) => (
           <StyledModal>
             <FlexDiv>
-              <AirbnbSlider priceHandler={priceHandler} />
+              <AirbnbSlider priceHandler={priceHandler} minPrice={minPrice} maxPrice={maxPrice} />
             </FlexDiv>
             <FlexDiv>
               <PriceInput priceHandler={setMinPrice} price={minPrice} />
@@ -80,7 +80,7 @@ function PriceModal() {
               <LeftDiv>
                 <CancelButton>삭제</CancelButton>
               </LeftDiv>
-              <SaveButton onClick={() => { filterStay(); }}>저장</SaveButton>
+              <SaveButton onClick={() => { addFilter({ minPrice, maxPrice }); }}>저장</SaveButton>
             </FlexDiv>
           </StyledModal>
         )

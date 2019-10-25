@@ -117,7 +117,7 @@ function GuestModal() {
   return (
     <StayConsumer>
       {
-        ({ filterStay }) => (
+        ({ addFilter }) => (
           <StyledModal>
             <FlexDiv>
               <LeftDiv>
@@ -149,7 +149,7 @@ function GuestModal() {
               <LeftDiv>
                 <CancelButton>삭제</CancelButton>
               </LeftDiv>
-              <SaveButton onClick={() => { filterStay(adult + child); }}>저장</SaveButton>
+              <SaveButton onClick={() => { addFilter({ guest: (adult + child) }); }}>저장</SaveButton>
             </FlexDiv>
           </StyledModal>
         )

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Slider from '@material-ui/core/Slider';
@@ -60,7 +61,7 @@ const CustomizedSlider = withStyles({
 })(Slider);
 
 function AirbnbSlider(props) {
-  const { priceHandler } = props;
+  const { minPrice, maxPrice, priceHandler } = props;
   const { setMinPrice, setMaxPrice } = priceHandler;
   const classes = useStyles();
 
@@ -74,13 +75,21 @@ function AirbnbSlider(props) {
       <CustomizedSlider
         onChange={changePrice}
         getAriaLabel={index => (index === 0 ? 'Minimum price' : 'Maximum price')}
-        defaultValue={[20000, 90000]}
+        value={[minPrice, maxPrice]}
         min={10000}
-        max={100000}
-        valueLabelDisplay="on"
+        max={300000}
       />
     </CustomizedPaper>
   );
 }
+
+AirbnbSlider.propTypes = {
+  minPrice: PropTypes.number.isRequired,
+  maxPrice: PropTypes.number.isRequired,
+  priceHandler: PropTypes.shape({
+    setMinPrice: PropTypes.func.isRequired,
+    setMaxPrice: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default AirbnbSlider;

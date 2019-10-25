@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const util_api = require('../../../javascripts/util/util_api');
 const models = require('../../../database/models');
 
-const { gt } = Sequelize.Op;
+const { gt, between } = Sequelize.Op;
 
 const stayController = {
   // 모든 숙소 정보와 카운트를 반환하는 api
@@ -10,6 +10,8 @@ const stayController = {
     try {
       const stays = await models.Stay.findAndCountAll({
         attributes: ['id', 'name', 'price', 'guest', 'type', 'image', 'beds', 'bedrooms', 'bathrooms', 'host_id', 'createdAt', 'updatedAt'],
+        offset: 0,
+        limit: 20,
       });
       util_api.respondData(res, stays);
     } catch (err) {
@@ -44,11 +46,17 @@ const stayController = {
   // 필터조건에 해당하는 숙소만을 반환하는 api
   async filterStays(req, res) {
     try {
-      const { guest } = req.query;
+      let { guest, minPrice, maxPrice } = req.query;
+      guest = guest || 0;
+      minPrice = minPrice || 0;
+      maxPrice = maxPrice || 300000;
       const stays = await models.Stay.findAndCountAll({
         where: {
           guest: {
             [gt]: guest,
+          },
+          price: {
+            [between]: [minPrice, maxPrice],
           },
         },
       });
