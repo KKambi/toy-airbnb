@@ -10,8 +10,6 @@ const stayController = {
     try {
       const stays = await models.Stay.findAndCountAll({
         attributes: ['id', 'name', 'price', 'guest', 'type', 'image', 'beds', 'bedrooms', 'bathrooms', 'host_id', 'createdAt', 'updatedAt'],
-        offset: 1 * 10, //FIXME: page변수로 현재 페이지에 따른거 보여줘야함
-        limit: 10,
       });
       util_api.respondData(res, stays);
     } catch (err) {
