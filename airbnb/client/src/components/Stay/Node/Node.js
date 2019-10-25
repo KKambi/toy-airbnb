@@ -31,12 +31,21 @@ function Node(props) {
   } = stay;
   const options = [guest, beds, bedrooms, bathrooms];
 
+  const typeMap = {
+    0: '집 전체',
+    1: '개인실',
+    2: '호텔 객실',
+    3: '다인실',
+  };
+
   return (
     <StayContainer>
       <Image value={image} />
       <StayDataContainer>
         <Name value={name} />
         <Options value={options} />
+        <div>￦{price}</div>
+        <div>{typeMap[type]}</div>
         <ReserveButton stayId={id} />
       </StayDataContainer>
     </StayContainer>
