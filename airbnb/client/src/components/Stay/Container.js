@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
-import { OpacityConsumer } from '../Context/ContainerOpacity';
-import { StayConsumer } from '../Context/StayContext';
+import { OpacityConsumer } from '../Context/OpacityContext';
+import { StayContext } from '../Context/StayContext';
 
 const StyledBackdrop = styled.div`
   opacity: ${props => (props.opacity)};
@@ -15,23 +15,19 @@ const StyledContainer = styled.div`
 `;
 
 function Container() {
+  const { stays, stayCount } = useContext(StayContext);
+
   return (
     <>
       <OpacityConsumer>
         {
           ({ stayOpacity, actions }) => (
-            <StayConsumer>
-              {
-                ({ stays, stayCount }) => (
-                  <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
-                    <StyledContainer>
-                      <NumberBar stayCount={stayCount} />
-                      {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
-                    </StyledContainer>
-                  </StyledBackdrop>
-                )
-              }
-            </StayConsumer>
+            <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
+              <StyledContainer>
+                <NumberBar stayCount={stayCount} />
+                {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+              </StyledContainer>
+            </StyledBackdrop>
           )
         }
       </OpacityConsumer>

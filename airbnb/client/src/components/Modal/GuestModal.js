@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { StayConsumer } from '../Context/StayContext';
+import { StayContext } from '../Context/StayContext';
 
 const StyledModal = styled.div`
   width: 33rem;
@@ -114,47 +114,43 @@ function GuestModal() {
     setKid(kid - 1);
   };
 
+  const { addFilter } = useContext(StayContext);
+
   return (
-    <StayConsumer>
-      {
-        ({ addFilter }) => (
-          <StyledModal>
-            <FlexDiv>
-              <LeftDiv>
-                성인
-              </LeftDiv>
-              <MinusButton number={adult} onClick={minusAdult}>-</MinusButton>
-              <NumberDiv>{adult}+</NumberDiv>
-              <PlusButton onClick={plusAdult}>+</PlusButton>
-            </FlexDiv>
-            <FlexDiv>
-              <LeftDiv>
-                어린이<br />
-                2~12세
-              </LeftDiv>
-              <MinusButton number={child} onClick={minusChild}>-</MinusButton>
-              <NumberDiv>{child}+</NumberDiv>
-              <PlusButton onClick={plusChild}>+</PlusButton>
-            </FlexDiv>
-            <FlexDiv>
-              <LeftDiv>
-                유아<br />
-                2세 미만
-              </LeftDiv>
-              <MinusButton number={kid} onClick={minusKid}>-</MinusButton>
-              <NumberDiv>{kid}+</NumberDiv>
-              <PlusButton onClick={plusKid}>+</PlusButton>
-            </FlexDiv>
-            <FlexDiv>
-              <LeftDiv>
-                <CancelButton>삭제</CancelButton>
-              </LeftDiv>
-              <SaveButton onClick={() => { addFilter({ guest: (adult + child) }); }}>저장</SaveButton>
-            </FlexDiv>
-          </StyledModal>
-        )
-      }
-    </StayConsumer>
+    <StyledModal>
+      <FlexDiv>
+        <LeftDiv>
+          성인
+        </LeftDiv>
+        <MinusButton number={adult} onClick={minusAdult}>-</MinusButton>
+        <NumberDiv>{adult}+</NumberDiv>
+        <PlusButton onClick={plusAdult}>+</PlusButton>
+      </FlexDiv>
+      <FlexDiv>
+        <LeftDiv>
+          어린이<br />
+          2~12세
+        </LeftDiv>
+        <MinusButton number={child} onClick={minusChild}>-</MinusButton>
+        <NumberDiv>{child}+</NumberDiv>
+        <PlusButton onClick={plusChild}>+</PlusButton>
+      </FlexDiv>
+      <FlexDiv>
+        <LeftDiv>
+          유아<br />
+          2세 미만
+        </LeftDiv>
+        <MinusButton number={kid} onClick={minusKid}>-</MinusButton>
+        <NumberDiv>{kid}+</NumberDiv>
+        <PlusButton onClick={plusKid}>+</PlusButton>
+      </FlexDiv>
+      <FlexDiv>
+        <LeftDiv>
+          <CancelButton>삭제</CancelButton>
+        </LeftDiv>
+        <SaveButton onClick={() => { addFilter({ guest: (adult + child) }); }}>저장</SaveButton>
+      </FlexDiv>
+    </StyledModal>
   );
 }
 

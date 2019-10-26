@@ -1,6 +1,6 @@
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { OpacityProvider } from './Context/ContainerOpacity';
+import { OpacityProvider } from './Context/OpacityContext';
 import { StayProvider } from './Context/StayContext';
 import theme from '../style/theme';
 import FilterBar from './Filter/FilterBar';

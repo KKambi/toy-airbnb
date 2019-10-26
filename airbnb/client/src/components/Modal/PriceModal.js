@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { StayConsumer } from '../Context/StayContext';
+import { StayContext } from '../Context/StayContext';
 import AirbnbSlider from '../Slider/AirbnbSlider';
 import PriceInput from './PriceInput';
 
@@ -58,34 +58,30 @@ const CancelButton = styled(Button)`
 function PriceModal() {
   const [minPrice, setMinPrice] = useState(50000);
   const [maxPrice, setMaxPrice] = useState(250000);
+  const { addFilter } = useContext(StayContext);
 
   const priceHandler = {
     setMinPrice,
     setMaxPrice,
   };
 
+
   return (
-    <StayConsumer>
-      {
-        ({ addFilter }) => (
-          <StyledModal>
-            <FlexDiv>
-              <AirbnbSlider priceHandler={priceHandler} minPrice={minPrice} maxPrice={maxPrice} />
-            </FlexDiv>
-            <FlexDiv>
-              <PriceInput priceHandler={setMinPrice} price={minPrice} />
-              <PriceInput priceHandler={setMaxPrice} price={maxPrice} />
-            </FlexDiv>
-            <FlexDiv>
-              <LeftDiv>
-                <CancelButton>삭제</CancelButton>
-              </LeftDiv>
-              <SaveButton onClick={() => { addFilter({ minPrice, maxPrice }); }}>저장</SaveButton>
-            </FlexDiv>
-          </StyledModal>
-        )
-      }
-    </StayConsumer>
+    <StyledModal>
+      <FlexDiv>
+        <AirbnbSlider priceHandler={priceHandler} minPrice={minPrice} maxPrice={maxPrice} />
+      </FlexDiv>
+      <FlexDiv>
+        <PriceInput priceHandler={setMinPrice} price={minPrice} />
+        <PriceInput priceHandler={setMaxPrice} price={maxPrice} />
+      </FlexDiv>
+      <FlexDiv>
+        <LeftDiv>
+          <CancelButton>삭제</CancelButton>
+        </LeftDiv>
+        <SaveButton onClick={() => { addFilter({ minPrice, maxPrice }); }}>저장</SaveButton>
+      </FlexDiv>
+    </StyledModal>
   );
 }
 

@@ -3,8 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import utilFetch from '../../utils/utilFetch';
 
-const Context = createContext();
-const { Provider, Consumer: StayConsumer } = Context;
+const StayContext = createContext();
 
 function StayProvider(props) {
   const [stays, setStays] = useState([]);
@@ -50,9 +49,9 @@ function StayProvider(props) {
   };
   const { children } = props;
   return (
-    <Provider value={value}>
+    <StayContext.Provider value={value}>
       {children}
-    </Provider>
+    </StayContext.Provider>
   );
 }
 
@@ -62,5 +61,5 @@ StayProvider.propTypes = {
 
 export {
   StayProvider,
-  StayConsumer,
+  StayContext,
 };
