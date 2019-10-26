@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { OpacityConsumer } from '../Context/OpacityContext';
+import { OpacityContext } from '../Context/OpacityContext';
 
 const StyledButton = styled.button`
   padding: 0.5em 0.8em
@@ -33,6 +33,8 @@ function FilterContainer(props) {
     activeFilterMethod,
     children,
   } = props;
+  const { stayOpacityHandler } = useContext(OpacityContext);
+  const { setOpacityCloudy, setOpacityClear } = stayOpacityHandler;
 
   const toggleButton = () => {
     setActive(!active);
@@ -45,28 +47,22 @@ function FilterContainer(props) {
   };
 
   return (
-    <OpacityConsumer>
-      {
-        ({ actions }) => (
-          <div>
-            <StyledButton
-              active={active}
-              onClick={() => {
-                toggleButton();
-                toggleModal();
-                actions.setOpacityCloudy();
-                actions.setOpacityClear();
-              }}
-            >
-              {name}
-            </StyledButton>
-            <ModalContainer modalDisplay={display}>
-              {children}
-            </ModalContainer>
-          </div>
-        )
-      }
-    </OpacityConsumer>
+    <div>
+      <StyledButton
+        active={active}
+        onClick={() => {
+          toggleButton();
+          toggleModal();
+          setOpacityCloudy();
+          setOpacityClear();
+        }}
+      >
+        {name}
+      </StyledButton>
+      <ModalContainer modalDisplay={display}>
+        {children}
+      </ModalContainer>
+    </div>
   );
 }
 

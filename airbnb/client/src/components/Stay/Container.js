@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NumberBar from './NumberBar';
 import Node from './Node/Node';
-import { OpacityConsumer } from '../Context/OpacityContext';
+import { OpacityContext } from '../Context/OpacityContext';
 import { StayContext } from '../Context/StayContext';
 
 const StyledBackdrop = styled.div`
@@ -16,22 +16,16 @@ const StyledContainer = styled.div`
 
 function Container() {
   const { stays, stayCount } = useContext(StayContext);
+  const { stayOpacity, stayOpacityHandler } = useContext(OpacityContext);
+  const { setOpacityClear } = stayOpacityHandler;
 
   return (
-    <>
-      <OpacityConsumer>
-        {
-          ({ stayOpacity, actions }) => (
-            <StyledBackdrop opacity={stayOpacity} onClick={actions.setOpacityClear}>
-              <StyledContainer>
-                <NumberBar stayCount={stayCount} />
-                {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
-              </StyledContainer>
-            </StyledBackdrop>
-          )
-        }
-      </OpacityConsumer>
-    </>
+    <StyledBackdrop opacity={stayOpacity} onClick={setOpacityClear}>
+      <StyledContainer>
+        <NumberBar stayCount={stayCount} />
+        {stays.map((stay) => <Node key={stay.id} stay={stay} />)}
+      </StyledContainer>
+    </StyledBackdrop>
   );
 }
 

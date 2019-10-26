@@ -1,8 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Context = createContext();
-const { Provider, Consumer: OpacityConsumer } = Context;
+const OpacityContext = createContext();
 
 function OpacityProvider(props) {
   const [stayOpacity, setStayOpacity] = useState(1);
@@ -19,17 +18,17 @@ function OpacityProvider(props) {
     }
   };
 
-  const actions = {
+  const stayOpacityHandler = {
     setOpacityCloudy,
     setOpacityClear,
   };
 
-  const value = { stayOpacity, actions };
+  const value = { stayOpacity, stayOpacityHandler };
   const { children } = props;
   return (
-    <Provider value={value}>
+    <OpacityContext.Provider value={value}>
       {children}
-    </Provider>
+    </OpacityContext.Provider>
   );
 }
 
@@ -39,5 +38,5 @@ OpacityProvider.propTypes = {
 
 export {
   OpacityProvider,
-  OpacityConsumer,
+  OpacityContext,
 };
